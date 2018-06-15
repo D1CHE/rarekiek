@@ -23,7 +23,7 @@ def main():
     while True:
 
         try:
-            with open("/home/pi/Desktop/leds.json", "r") as f:
+            with open("/home/pi/Desktop/rarekiek/leds.json", "r") as f:
                 data = json.load(f)
         except:
             continue
