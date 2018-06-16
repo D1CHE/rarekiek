@@ -4,11 +4,12 @@ import time
 from neopixel import *
 import argparse
 import json
+import pygame
 
 # LED strip configuration:
-LED_COUNT      = 9      # Number of LED pixels.
+LED_COUNT      = 9       # Number of LED pixels.
 LED_PIN        = 10      # GPIO pin connected to the pixels (18 uses PWM!).
-LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
+LED_FREQ_HZ    = 1100000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
 LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
@@ -48,18 +49,12 @@ def update_leds(strip, data):
     
     strip.show()
         
-def update_audio(data):
-    
-    audio_state = data["audio"]
-
 def main():
     # Create NeoPixel object with appropriate configuration.
     strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
     # Intialize the library (must be called once before other functions).
     strip.begin()
-    
-    # Audio setup
-    
+
     while True:
         try:
             with open("/home/pi/Desktop/rarekiek/leds.json", "r") as f:
@@ -68,7 +63,6 @@ def main():
             continue
         
         update_leds(strip, d)
-        #update_audio(d)
 
 if __name__ == "__main__":
     main()
